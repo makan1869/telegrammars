@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 /**
  * Created by serenade on 7/31/17.
@@ -25,19 +26,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+    // roles admin allow to access /admin/**
+    // roles user allow to access /user/**
+    // custom 403 access denied handler
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+
+        http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/css/**", "/js/**", "/images/**", "/fonts/**", "/registration").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+                .antMatchers("/*").permitAll();
     }
 
     @Autowired

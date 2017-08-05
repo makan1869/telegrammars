@@ -1,7 +1,77 @@
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
 .telegrammars-himalaya-evening {
     background-image: url("../images/himalaya-evening.jpg");
     background-repeat:no-repeat;
     background-size:100% 100%;
     width : 100%;
     height: 350px;
+    padding: 0px;
+}
+
+.telegrammars-navbar-title {
+    text-decoration-color: #adadad;
+}
+
+.telegrammars-slogan {
+    color: white;
+    top: 300px;
+    height: 50px;
+    position: relative;
+    text-align: center;
+    font-size: 30px;
+    background-color: black;
+    opacity: 0.4;
+}
+
+.telegrammars-main-login {
+    text-align: right;
+}
+
+.telegrammars-main-login img {
+    margin-top: 20%;
+    width: 300px;
+}
+
+.telegrammars-main-login a {
+    background-color: #61A8DE;
+    color: #ffffff;
+    border-radius: 5px;
+    height: 150px;
+    padding-right: 10px;
+    padding-left: 10px;
+
+}
+
+.telegrammars-main-login a span {
+    background-image: url("../images/telegram.svg");;
+    background-position-x: right;
+    background-size: 20px;
+    background-repeat: no-repeat;
+    padding-right: 25px;
+}
+
+
+
+.telegrammars-main-copyright {
+    text-align: left;
+    font-size: 28px;
+    width: 400px;
+    padding-top: 100px;
+    color: gray;
+
 }
