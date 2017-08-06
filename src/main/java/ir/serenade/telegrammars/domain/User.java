@@ -18,6 +18,10 @@ public class User {
     @Column(unique = true)
     private String username;
     private String password;
+
+    private String firstName;
+    private String lastName;
+    private String profilePhoto;
     @Transient
     private String passwordConfirm;
     @ManyToMany
@@ -25,6 +29,15 @@ public class User {
     private Set<Role> roles;
 
     public User() {
+    }
+
+    public User(String firstName, String lastName, String username, Long chatId, String profilePhoto) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.chatId = chatId;
+        this.profilePhoto = profilePhoto;
+
     }
 
     public Long getId() {
@@ -75,5 +88,29 @@ public class User {
 
     public void setChatId(Long chatId) {
         this.chatId = chatId;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
     }
 }

@@ -7,7 +7,11 @@ import ir.serenade.telegrammars.domain.User;
  */
 public interface UserService {
 
-    void save(User user);
+    User save(User user);
+
+    User findById(Long id);
 
     User findByUsername(String username);
+
+    User findByChatId(Long chatId);
 }
