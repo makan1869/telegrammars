@@ -12,4 +12,10 @@ public class WelcomeController {
 		return "index";
 	}
 
+	@GetMapping("/home")
+	public String home() {
+		return "home";
+	}
+
+
 }

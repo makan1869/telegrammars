@@ -98,11 +98,10 @@
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.github.kuptservol</groupId>
-			<artifactId>spring-telegram-bot-starter</artifactId>
-			<version>1.5</version>
+			<groupId>org.telegram</groupId>
+			<artifactId>telegrambots</artifactId>
+			<version>3.2</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>

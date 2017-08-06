@@ -1,5 +1,6 @@
 package ir.serenade.telegrammars.service;
 
+import ir.serenade.telegrammars.domain.Role;
 import ir.serenade.telegrammars.domain.User;
 
 /**
@@ -14,4 +15,8 @@ public interface UserService {
     User findByUsername(String username);
 
     User findByChatId(Long chatId);
+
+    Role findRoleByName(String name);
+
+    User getLoggedInUser(Boolean forceFresh);
 }

@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <div th:fragment="header-css">
+        <!-- this is header-css -->
+        <link rel="stylesheet" type="text/css"
+              th:href="@{/css/bootstrap.min.css}" />
+        <link rel="stylesheet" type="text/css"
+              th:href="@{/css/bootstrap-theme.min.css}" />
+
+        <link rel="stylesheet" th:href="@{/css/main.css}" />
+    </div>
+</head>
+<body>
+<div th:fragment="header">
+        <div class="container telegrammars-signed-in-header">
+
+            <img class="telegrammars-signed-in-header-logo" th:src="@{/images/logo.svg}" />
+            <li class="dropdown telegrammars-signed-in-header-profile-dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <img class="telegrammars-signed-in-header-profile" th:src="@{/user/profile-picture}"/>
+                    <ul class="dropdown-menu dropdown-menu pull-left">
+                        <li><a href="@{/logout}"><i class="fa fa-sign-out"></i> Sign-out</a></li>
+                    </ul>
+                </a>
+            </li>
+
+        </div>
+</div>
+
+</body>
+</html>

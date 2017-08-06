@@ -4,15 +4,14 @@
 <head>
     <title th:text="#{view.index.title}">Welcome</title>
 
-    <div th:replace="fragments/header :: header-css"/>
+    <div th:replace="fragments/header_signed :: header-css"/>
 
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/header_signed :: header"/>
 
 <div class="container">
-    <span sec:authentication="name">Bob</span>
 </div>
 <div th:replace="fragments/footer :: footer"/>
 

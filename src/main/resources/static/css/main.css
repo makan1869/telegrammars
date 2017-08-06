@@ -58,7 +58,7 @@ a:active {
 }
 
 .telegrammars-main-login a span {
-    background-image: url("../images/telegram.svg");;
+    background-image: url("../images/telegram.svg");
     background-position-x: right;
     background-size: 20px;
     background-repeat: no-repeat;
@@ -74,4 +74,33 @@ a:active {
     padding-top: 100px;
     color: gray;
 
+}
+
+.telegrammars-signed-in-header {
+    width: 100%;
+    background-image: url("../images/bk.svg");
+    background-position-x: left;
+    background-position-y: top;
+    background-size: 350px;
+    height: 350px;
+    background-repeat: no-repeat;
+    text-align: center;
+}
+.telegrammars-signed-in-header-logo {
+    height: 150px;
+}
+
+.telegrammars-signed-in-header-profile {
+    height: 64px;
+    width: 64px;
+}
+
+.telegrammars-signed-in-header-profile-dropdown {
+    position: fixed;
+    right: 160px;
+    top: 10px;
+}
+
+.telegrammars-signed-in-header-profile-dropdown a ul {
+    left:0px;
 }

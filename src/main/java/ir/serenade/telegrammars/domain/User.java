@@ -22,8 +22,12 @@ public class User {
     private String firstName;
     private String lastName;
     private String profilePhoto;
+    private String phoneNumber;
+
     @Transient
     private String passwordConfirm;
+    @Transient
+    private boolean passwordReset = false;
     @ManyToMany
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -62,6 +66,7 @@ public class User {
     }
 
     public void setPassword(String password) {
+        this.passwordReset = true;
         this.password = password;
     }
 
@@ -112,5 +117,21 @@ public class User {
 
     public void setProfilePhoto(String profilePhoto) {
         this.profilePhoto = profilePhoto;
+    }
+
+    public boolean isPasswordReset() {
+        return passwordReset;
+    }
+
+    public void setPasswordReset(boolean passwordReset) {
+        this.passwordReset = passwordReset;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
