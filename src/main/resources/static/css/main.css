@@ -87,7 +87,8 @@ a:active {
     text-align: center;
 }
 .telegrammars-signed-in-header-logo {
-    height: 150px;
+    height: 90px;
+    margin-top: 70px;
 }
 
 .telegrammars-signed-in-header-profile {
@@ -103,4 +104,49 @@ a:active {
 
 .telegrammars-signed-in-header-profile-dropdown a ul {
     left:0px;
+}
+
+.telegrammars-selection-box {
+    background-image: url("../images/box.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 250px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.telegrammars-selection-box-new {
+    background-image: url("../images/new-box.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 250px;
+    text-align: center;
+    padding-top: 10px;
+}
+.telegrammars-selectoin-box-icon {
+    height: 60px;
+}
+
+.telegrammars-selection-row{
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.telegrammars-wizard {
+    top: -100px;
+    position: relative;
+    padding-right: 20px;
+}
+
+
+.telegrammars-wizard-item {
+    text-align: center;
+    height: 70px;
+    width: 120px;
+}
+
+.telegrammars-wizard-item img {
+    width: 48px;
+    height: 48px;
+
 }

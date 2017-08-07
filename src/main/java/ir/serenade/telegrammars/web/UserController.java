@@ -71,8 +71,18 @@ public class UserController {
     @RequestMapping(value="/user/profile-picture", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
     public @ResponseBody byte[] profilePicture() throws IOException {
         User u = userService.getLoggedInUser(false);
-        if(u.getProfilePhoto() != null) {
+        if(u != null && u.getProfilePhoto() != null) {
             return IOUtils.toByteArray(new URL(u.getProfilePhoto()).openStream());
+        } else {
+            return null;
+        }
+    }
+
+    @RequestMapping(value="/user/name", method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
+    public @ResponseBody String name() throws IOException {
+        User u = userService.getLoggedInUser(false);
+        if(u != null) {
+            return u.getFirstName()+ " " + u.getLastName();
         } else {
             return null;
         }

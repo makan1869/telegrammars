@@ -11,11 +11,28 @@
 
 <div th:replace="fragments/header_signed :: header"/>
 
+<div class="container-fluid telegrammars-wizard">
+    <div class="row">
+
+        <div class="col-xs-8">
+        </div>
+        <div class="col-xs-2 telegrammars-wizard-item">
+                <img class ="telegrammars-wizard-new-campaign" th:src="@{/images/campain-select-01.svg}"/><br/>
+                <span class="telegrammars-wizard-item-text" th:text="#{campaign.select.goal}"></span>
+        </div>
+        <div class="col-xs-2 telegrammars-wizard-item">
+                <img class ="telegrammars-wizard-new-campaign" th:src="@{/images/new-campain-pass.svg}"/><br/>
+                <span class="telegrammars-wizard-item-text" th:text="#{campaign.new}"></span>
+        </div>
+
+    </div>
+</div>
+
 <div class="container">
     <div class="row telegrammars-selection-row">
         <div class="col-md-3 telegrammars-selection-box">
             <a th:href="@{/campaign/new}" class="telegrammars-selectoin-box-link">
-            <img class="telegrammars-selectoin-box-icon" th:src="@{/images/new-campain.svg}"/> <br/>
+                <img class="telegrammars-selectoin-box-icon" th:src="@{/images/new-campain.svg}"/> <br/>
             </a>
             <span class="telegrammars-selectoin-box-title" th:text="#{new.campaign}"></span>
             <br/>
@@ -44,6 +61,7 @@
             <span class="telegrammars-selectoin-box-telp" th:text="#{telegram.search.engine.help}"></span>
         </div>
     </div>
+
 </div>
 <div th:replace="fragments/footer :: footer"/>
 
