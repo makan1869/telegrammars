@@ -1,6 +1,7 @@
 package ir.serenade.telegrammars.bot;
 
 import ir.serenade.telegrammars.domain.User;
+import ir.serenade.telegrammars.repository.TokenRepository;
 import ir.serenade.telegrammars.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +19,6 @@ import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardButto
 import org.telegram.telegrambots.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
-import redis.clients.jedis.JedisPool;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -35,9 +35,6 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
 
     @Autowired
     UserService userService;
-
-    @Autowired
-    JedisPool jedisPool;
 
 
     /*
@@ -88,7 +85,7 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         if(update.hasMessage() && update.getMessage().hasText() && update.getMessage().getText().startsWith("/start ")) {
             String _uuid = update.getMessage().getText().substring(7);
-            String date = jedisPool.getResource().get("login_"+_uuid);
+            String date = TokenRepository.get("login_"+_uuid);
             if(date != null) {
                 Chat chat = update.getMessage().getChat();
                 User user = userService.findByChatId(chat.getId());
@@ -113,7 +110,7 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
                     }
                 } else {
                     String uuid = UUID.randomUUID().toString();
-                    jedisPool.getResource().setex("telegram_"+uuid, 60 , user.getId()+"");
+                    TokenRepository.set("telegram_"+uuid, user.getId()+"", 300);
                     try {
                         sendMessage(new SendMessage().setChatId(update.getMessage().getChatId())
                                 .setText("Please click this link to finish your signup at *Telegrammars*: \n" +
@@ -153,7 +150,7 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
                 userService.save(user);
 
                 String uuid = UUID.randomUUID().toString();
-                jedisPool.getResource().setex("telegram_"+uuid, 60 , user.getId()+"");
+                TokenRepository.set("telegram_"+uuid, user.getId()+"", 300);
 
                 try {
                     sendMessage(new SendMessage().setChatId(update.getMessage().getChatId())

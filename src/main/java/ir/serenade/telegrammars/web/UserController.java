@@ -2,6 +2,7 @@ package ir.serenade.telegrammars.web;
 
 import ir.serenade.telegrammars.domain.User;
 import ir.serenade.telegrammars.domain.validator.UserValidator;
+import ir.serenade.telegrammars.repository.TokenRepository;
 import ir.serenade.telegrammars.service.SecurityService;
 import ir.serenade.telegrammars.service.UserService;
 import org.apache.commons.io.IOUtils;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import redis.clients.jedis.JedisPool;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,8 +33,6 @@ import java.util.UUID;
 public class UserController {
 
 
-    @Autowired
-    JedisPool jedisPool;
 
     @Autowired
     UserService userService;
@@ -48,13 +46,13 @@ public class UserController {
     @RequestMapping(path = "/telegram")
     public String loginWithTelegram() {
         String uuid = UUID.randomUUID().toString();
-        jedisPool.getResource().setex("login_"+uuid, 60 , new Date().toString());
+        TokenRepository.set("login_"+uuid, new Date().toString(), 300);
         return "redirect:https://telegram.me/tlgrammarsBot?start="+uuid;
     }
 
     @RequestMapping(path = "/telegram/token/{uuid}")
     public String AutologinWithTelegram(@PathVariable("uuid") String uuid, HttpServletRequest request, HttpServletResponse response) {
-        String userId = jedisPool.getResource().get("telegram_"+uuid);
+        String userId = TokenRepository.get("telegram_"+uuid);
         if(userId != null) {
             User user = userService.findById(Long.valueOf(userId));
             if(user != null) {
