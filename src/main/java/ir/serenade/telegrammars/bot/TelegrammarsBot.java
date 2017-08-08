@@ -6,6 +6,7 @@ import ir.serenade.telegrammars.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.api.methods.GetFile;
 import org.telegram.telegrambots.api.methods.GetUserProfilePhotos;
@@ -36,6 +37,16 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
     @Autowired
     UserService userService;
 
+
+
+    @Value("${telegrammars.login.bot.name}")
+    private String botName;
+
+    @Value("${telegrammars.login.bot.token}")
+    private String botToken;
+
+    @Value("${telegrammmars.domain.name}")
+    private String domainName;
 
     /*
     @Autowired
@@ -114,7 +125,7 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
                     try {
                         sendMessage(new SendMessage().setChatId(update.getMessage().getChatId())
                                 .setText("Please click this link to finish your signup at *Telegrammars*: \n" +
-                                        "[Click here]("+ "http://telegrammars.com:8080/telegram/token/" + uuid  +")"
+                                        "[Click here]("+ "http://"+domainName+"/telegram/token/" + uuid  +")"
                                 )
                                 .setParseMode(ParseMode.MARKDOWN));
 
@@ -155,7 +166,7 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
                 try {
                     sendMessage(new SendMessage().setChatId(update.getMessage().getChatId())
                             .setText("Please click this link to finish your signup at *Telegrammars*: \n" +
-                                    "[Click here]("+ "http://telegrammars.com:8080/telegram/token/" + uuid  +")"
+                                    "[Click here]("+ "http://"+domainName+"/telegram/token/" + uuid  +")"
                             )
                             .setParseMode(ParseMode.MARKDOWN));
 
@@ -171,11 +182,11 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
 
     @Override
     public String getBotUsername() {
-        return "@tlgrammarsBot";
+        return "@" + botName;
     }
 
     @Override
     public String getBotToken() {
-        return "422710354:AAHmTyh9loCuQq40IQGD-_EQoDB62DPCSsE";
+        return botToken;
     }
 }

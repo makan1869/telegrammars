@@ -1,6 +1,7 @@
 package ir.serenade.telegrammars.domain;
 
 import javax.persistence.*;
+import java.sql.Ref;
 import java.util.Date;
 
 /**
@@ -52,6 +53,12 @@ public class Campaign {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
+
+
+    @OneToOne
+    @JoinColumn(name = "reference_id", nullable = true)
+    private Reference reference;
+
 
     public Campaign() {
     }
@@ -147,5 +154,13 @@ public class Campaign {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Reference getReference() {
+        return reference;
+    }
+
+    public void setReference(Reference reference) {
+        this.reference = reference;
     }
 }

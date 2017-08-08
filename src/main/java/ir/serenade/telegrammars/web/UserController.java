@@ -7,6 +7,7 @@ import ir.serenade.telegrammars.service.SecurityService;
 import ir.serenade.telegrammars.service.UserService;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -43,11 +44,19 @@ public class UserController {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Value("${telegrammars.login.bot.name}")
+    private String botName;
+
     @RequestMapping(path = "/telegram")
     public String loginWithTelegram() {
-        String uuid = UUID.randomUUID().toString();
-        TokenRepository.set("login_"+uuid, new Date().toString(), 300);
-        return "redirect:https://telegram.me/tlgrammarsBot?start="+uuid;
+        if(userService.getLoggedInUser(false) !=  null) {
+            return "redirect:/home";
+        } else {
+            String uuid = UUID.randomUUID().toString();
+            TokenRepository.set("login_"+uuid, new Date().toString(), 300);
+            return "redirect:https://telegram.me/"+botName+"?start="+uuid;
+        }
+
     }
 
     @RequestMapping(path = "/telegram/token/{uuid}")

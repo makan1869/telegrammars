@@ -1,7 +1,9 @@
 package ir.serenade.telegrammars.config;
 
 import ir.serenade.telegrammars.bot.TelegrammarsBot;
+import ir.serenade.telegrammars.domain.Campaign;
 import ir.serenade.telegrammars.domain.Role;
+import ir.serenade.telegrammars.repository.CampaignRepository;
 import ir.serenade.telegrammars.repository.RoleRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,8 @@ import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.TelegramBotsApi;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
+import java.util.Date;
+
 /**
  * Created by serenade on 8/6/17.
  */
@@ -23,6 +27,9 @@ public class ApplicationStartup
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    CampaignRepository campaignRepository;
 
     @Autowired
     TelegrammarsBot telegrammarsBot;
@@ -44,6 +51,19 @@ public class ApplicationStartup
         if(userRole == null) {
             roleRepository.save(new Role("ROLE_USER"));
         }
+
+        /*
+        Campaign campaign = new Campaign();
+        campaign.setBudget(Campaign.BudgetGroup.BETWEEN_10_100_MILLION);
+        campaign.setCallToAction("http://roozarooz.com");
+        campaign.setName("روزآروز");
+        campaign.setDescription("کمپین گرفتن تبلیغ برای کانال تلگرام روزآروز");
+        campaign.setStartDate(new Date());
+        campaign.setEndDate(new Date());
+
+        campaignRepository.save(campaign);
+        */
+
 
         try {
             TelegramBotsApi telegramBotsApi = createTelegramBotsApi();

@@ -150,3 +150,11 @@ a:active {
     height: 48px;
 
 }
+
+.telegrammars-list {
+    direction: rtl;
+}
+
+.telegrammars-thead tr th{
+    text-align: right;
+}

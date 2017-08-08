@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title th:text="#{view.index.title}">Welcome</title>
+
+    <div th:replace="fragments/header_signed :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="fragments/header_signed :: header"/>
+
+<div class="container telegrammars-list">
+    <h1 th:text="#{campaign.list}"></h1>
+
+    <table class="table table-responsive telegrammars-table">
+        <thead class="thead-inverse telegrammars-thead">
+            <tr>
+                <th th:text="#{campaign.reference.id}"></th>
+                <th th:text="#{campaign.name}"></th>`
+                <th th:text="#{campaign.reference.post.link}"></th>
+                <th th:text="#{campaign.reference.post.view}"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="campaign : ${campaigns}" >
+                <td>
+                    <a th:href="@{/campaign/show/(id=${campaign.id})}" th:text="${campaign.id}"></a>
+                </td>
+                <td th:text="${campaign.name}"></td>
+                <td th:text="${campaign.reference.postLink}"></td>
+                <td th:text="${campaign.reference.totalView}"></td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

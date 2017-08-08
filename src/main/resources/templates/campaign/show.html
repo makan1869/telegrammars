@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title th:text="#{view.index.title}">Welcome</title>
+
+    <div th:replace="fragments/header_signed :: header-css"/>
+
+
+
+
+</head>
+<body>
+
+<div th:replace="fragments/header_signed :: header"/>
+
+<th:block th:if="${campaign != null}">
+    <div class="container">
+        <h1 class="telegrammars-list" th:text="${campaign.name}"></h1>
+
+        <div id="chart1-container" style="top: -100px; min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+    </div>
+</th:block>
+
+
+<div class="container telegrammars-list">
+    <h1 th:text="${campaign.name}"></h1>
+
+    <table class="table table-responsive telegrammars-table">
+        <thead class="thead-inverse telegrammars-thead">
+        <tr>
+            <th th:text="#{campaign.view.date}"></th>
+            <th th:text="#{campaign.view.channel.name}"></th>`
+            <th th:text="#{campaign.view.post.link}"></th>
+            <th th:text="#{campaign.view.post.view}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="view : ${campaign.reference.views}" >
+            <td th:text="${view.channelName}"></td>
+            <td style="direction: ltr" th:text="${view.creationDate}"></td>
+            <td th:text="${view.postLink}"></td>
+            <td th:text="${view.views}"></td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+<script type="text/javascript"
+        th:src="@{/js/highcharts.js}"></script>
+<script type="text/javascript"
+        th:src="@{/js/exporting.js}"></script>
+<script type="text/javascript"
+        th:src="@{/js/telegrammars-chart.js}"></script>
+
+<script th:inline="javascript">
+    jQuery(document).ready(function() {
+        getRemoteDataDrawChart(/*[[@{/campaign/chart(id=${campaign.id})}]]*/'', createNewLineChart('chart1-container'));
+    });
+</script>
+</body>
+</html>
