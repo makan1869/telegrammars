@@ -37,7 +37,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="view : ${campaign.reference.total}" >
+        <tr th:each="view : ${campaign.reference.totals}" >
             <td style="direction: ltr" th:text="${view.creationDate}"></td>
             <td th:text="${view.channelName}"></td>
             <td th:text="${view.views}"></td>
