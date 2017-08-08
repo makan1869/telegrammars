@@ -55,18 +55,25 @@ public class CampaignServiceImpl implements CampaignService {
     public DataBean getLineChartData(Campaign campaign) {
         List<SeriesBean> list = new ArrayList<SeriesBean>();
         ArrayList<Long> views = new ArrayList<Long>();
+        ArrayList<Long> diffs = new ArrayList<Long>();
         ArrayList<String> dates = new ArrayList<String>();
 
 
-
+        long lastView = -1;
         for(ReportViews view : campaign.getReference().getViews()) {
             if(view.getPostLink().equals(campaign.getReference().getPostLink())) {
+                if(lastView < 0) {
+                    lastView = view.getViews();
+                }
+                diffs.add(view.getViews() - lastView);
+                lastView = view.getViews();
                 views.add(view.getViews());
                 dates.add(view.getCreationDate().toString());
             }
 
         }
         list.add(new SeriesBean(campaign.getName(), "#3366cc", views.toArray(new Long[views.size()])));
+        list.add(new SeriesBean("تغییرات", "#000000", diffs.toArray(new Long[views.size()])));
 
         return new DataBean("chart1-container", campaign.getName(), "Views", "Run Dates", dates, list);
     }

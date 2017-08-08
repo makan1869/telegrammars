@@ -32,16 +32,14 @@
         <thead class="thead-inverse telegrammars-thead">
         <tr>
             <th th:text="#{campaign.view.date}"></th>
-            <th th:text="#{campaign.view.channel.name}"></th>`
-            <th th:text="#{campaign.view.post.link}"></th>
+            <th th:text="#{campaign.view.channel.name}"></th>
             <th th:text="#{campaign.view.post.view}"></th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="view : ${campaign.reference.views}" >
-            <td th:text="${view.channelName}"></td>
+        <tr th:each="view : ${campaign.reference.total}" >
             <td style="direction: ltr" th:text="${view.creationDate}"></td>
-            <td th:text="${view.postLink}"></td>
+            <td th:text="${view.channelName}"></td>
             <td th:text="${view.views}"></td>
         </tr>
         </tbody>

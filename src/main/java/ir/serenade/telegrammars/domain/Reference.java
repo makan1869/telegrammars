@@ -22,6 +22,11 @@ public class Reference {
     @OrderBy("creationDate ASC")
     private List<ReportViews> views;
 
+
+    @OneToMany(mappedBy = "reference", cascade = CascadeType.ALL)
+    @OrderBy("creationDate ASC")
+    private List<ChannelViews> totals;
+
     public Reference() {
     }
 
@@ -63,5 +68,13 @@ public class Reference {
 
     public void setTotalView(Long totalView) {
         this.totalView = totalView;
+    }
+
+    public List<ChannelViews> getTotals() {
+        return totals;
+    }
+
+    public void setTotals(List<ChannelViews> totals) {
+        this.totals = totals;
     }
 }
