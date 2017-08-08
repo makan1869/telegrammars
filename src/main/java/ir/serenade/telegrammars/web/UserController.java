@@ -47,13 +47,16 @@ public class UserController {
     @Value("${telegrammars.login.bot.name}")
     private String botName;
 
+    @Autowired
+    private TokenRepository tokenRepository;
+
     @RequestMapping(path = "/telegram")
     public String loginWithTelegram() {
         if(userService.getLoggedInUser(false) !=  null) {
             return "redirect:/home";
         } else {
             String uuid = UUID.randomUUID().toString();
-            TokenRepository.set("login_"+uuid, new Date().toString(), 300);
+            tokenRepository.set("login_"+uuid, new Date().toString(), 300);
             return "redirect:https://telegram.me/"+botName+"?start="+uuid;
         }
 
@@ -61,7 +64,7 @@ public class UserController {
 
     @RequestMapping(path = "/telegram/token/{uuid}")
     public String AutologinWithTelegram(@PathVariable("uuid") String uuid, HttpServletRequest request, HttpServletResponse response) {
-        String userId = TokenRepository.get("telegram_"+uuid);
+        String userId = tokenRepository.get("telegram_"+uuid);
         if(userId != null) {
             User user = userService.findById(Long.valueOf(userId));
             if(user != null) {

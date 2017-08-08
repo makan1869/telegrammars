@@ -48,6 +48,9 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
     @Value("${telegrammmars.domain.name}")
     private String domainName;
 
+    @Autowired
+    private TokenRepository tokenRepository;
+
     /*
     @Autowired
     TelegramBotApi telegramBotApi;
@@ -96,7 +99,7 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
         if(update.hasMessage() && update.getMessage().hasText() && update.getMessage().getText().startsWith("/start ")) {
             String _uuid = update.getMessage().getText().substring(7);
-            String date = TokenRepository.get("login_"+_uuid);
+            String date = tokenRepository.get("login_"+_uuid);
             if(date != null) {
                 Chat chat = update.getMessage().getChat();
                 User user = userService.findByChatId(chat.getId());
@@ -121,7 +124,7 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
                     }
                 } else {
                     String uuid = UUID.randomUUID().toString();
-                    TokenRepository.set("telegram_"+uuid, user.getId()+"", 300);
+                    tokenRepository.set("telegram_"+uuid, user.getId()+"", 300);
                     try {
                         sendMessage(new SendMessage().setChatId(update.getMessage().getChatId())
                                 .setText("Please click this link to finish your signup at *Telegrammars*: \n" +
@@ -161,7 +164,7 @@ public class TelegrammarsBot extends TelegramLongPollingBot {
                 userService.save(user);
 
                 String uuid = UUID.randomUUID().toString();
-                TokenRepository.set("telegram_"+uuid, user.getId()+"", 300);
+                tokenRepository.set("telegram_"+uuid, user.getId()+"", 300);
 
                 try {
                     sendMessage(new SendMessage().setChatId(update.getMessage().getChatId())
