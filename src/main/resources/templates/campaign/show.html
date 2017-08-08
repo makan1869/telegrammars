@@ -14,6 +14,26 @@
 
 <div th:replace="fragments/header_signed :: header"/>
 
+
+<div class="container-fluid telegrammars-wizard">
+    <div class="row">
+
+        <div class="col-xs-8">
+        </div>
+        <div class="col-xs-2 telegrammars-wizard-item">
+            <img class ="telegrammars-wizard-new-campaign" th:src="@{/images/date-button-01.svg}"/><br/>
+            <span class="telegrammars-wizard-item-text" th:text="#{campaign.detail}"></span>
+        </div>
+        <div class="col-xs-2 telegrammars-wizard-item">
+            <a th:href="@{/campaign/list}">
+            <img class ="telegrammars-wizard-new-campaign" th:src="@{/images/view-pass-01.svg}"/><br/>
+            </a>
+            <span class="telegrammars-wizard-item-text" th:text="#{campaign.list}"></span>
+        </div>
+
+    </div>
+</div>
+
 <th:block th:if="${campaign != null}">
     <div class="container">
         <h1 class="telegrammars-list" th:text="${campaign.name}"></h1>
